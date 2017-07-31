@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="author" content="Aniket Jha"/>
+<meta name="description" content="DailyStore is a general shop where you can get variety of items,fruits,grocery and staples,HouseHold Needs,Bevrages,Personel care items,Stationaries... All Items That Make Up A Home And Maintain It Are Sold By Us."/>
+
+<meta property="og:image" content="logo/DailyStore.png"/>
+<meta property="og:title" content="Daily Store"/>
+<meta property="og:url" content="https://vtechguys.github.io/dailystore/" />
+<meta property="og:description" content="DailyStore is a general shop where you can get variety of items,fruits,grocery and staples,HouseHold Needs,Bevrages,Personel care items,Stationaries... All Items That Make Up A Home And Maintain It Are Sold By Us."/>
+
+<meta property="twitter:image" content="logo/DailyStore.png"/>
+<meta property="twitter:title" content="Daily Store"/>
+<meta property="twitter:url" content="https://vtechguys.github.io/dailystore/"/>
+<meta property="twitter:description" content="DailyStore is a general shop where you can get variety of items,fruits,grocery and staples,HouseHold Needs,Bevrages,Personel care items,Stationaries... All Items That Make Up A Home And Maintain It Are Sold By Us."/>
+
+<title>Daily Store</title>
+	<link rel="shortcut icon" href="logo/DailyStore.png" type="image/x-icon"/>
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+
+<style>
+	#header-div{margin-bottom: 70px;}
+	.item-selected{margin-bottom: 5px;}
+	.item-carted-decs{font-size:20px;color:black;}
+	.glyphicon-rotate-y{float:right;transform:scaleX(-1);}
+#top-brands{margin-top:10px;}
+.cat{background: white;border:7px solid rgb(249,249,249);
+	color:black; }
+	.cat:hover img{}
+	.cat p{color:gray;}
+	.popover{background:rgb(32,32,32);color:white;font-size:18px;}
+	.btn-modal-head:hover{color:black;}
+	.badge-cart-items{ background:rgb(217,83,79);
+   position:relative;
+   top: -15px;
+   left: -30px;}
+	.badge-cart-items-modal{ background:rgb(217,83,79);
+   position:relative;
+   top: -20px;
+   left: -15px;}
+/*experiment*/
+		.modal.left .modal-dialog,
+	.modal.right .modal-dialog {
+		position: fixed;
+		margin: auto;
+		width: 320px;
+		height: 100%;
+		-webkit-transform: translate3d(0%, 0, 0);
+		    -ms-transform: translate3d(0%, 0, 0);
+		     -o-transform: translate3d(0%, 0, 0);
+		        transform: translate3d(0%, 0, 0);
+	}
+
+	.modal.left .modal-content,
+	.modal.right .modal-content {
+		height: 100%;
+		overflow-y: auto;
+	}
+	
+	.modal.left .modal-body,
+	.modal.right .modal-body {
+		padding: 15px 15px 80px;
+	}
+
+/*Left*/
+	.modal.left.fade .modal-dialog{
+		left: -320px;
+		-webkit-transition: opacity 0.3s linear, left 0.3s ease-out;
+		   -moz-transition: opacity 0.3s linear, left 0.3s ease-out;
+		     -o-transition: opacity 0.3s linear, left 0.3s ease-out;
+		        transition: opacity 0.3s linear, left 0.3s ease-out;
+	}
+	
+	.modal.left.fade.in .modal-dialog{
+		left: 0;
+	}
+	
+	
+	</style>
+</head>
+<body style="background:rgb(249,249,249);">
+<div class="container-fluid">
+	<div id="header-div" class="row">
+	<nav class="navbar navbar-default  navbar-inverse navbar-fixed-top " role="navigation">
+		<div class="container-fluid" >
+	<!--this helps grouping beter-->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle Navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			<a href="https:" class="navbar-brand tooltip-test"
+			    data-toggle="tooltip" data-placement="right"
+					  title="Home"
+			   >
+			<!--img logo-->
+			<!--glyphicon home-->
+				<span style="color:white;font-size:20px;"
+							  class="glyphicon glyphicon-home " ></span>
+			</a>
+			</div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<!--nav list items-->					
+			<ul class="nav navbar-nav">
+			<!--we will call geolocation on page load or click-->
+				<li class="">
+					<a  onclick="getMyDelivLoc() promptLoc()">
+					 <span style="font-size:20px;" class="glyphicon glyphicon-map-marker"></span>
+						City-Pincode
+						<span style="font-size:10px;" 
+						class="glyphicon glyphicon-chevron-down"></span>
+					</a>
+				</li>
+			<!--login and signup-->
+				<li  style="" class="">
+					<a href="#" data-toggle="popover" data-placement="bottom"
+					   data-container="body" 
+					   >
+						Login/SignUp
+						<span style="float:right;font-size:20px;color:white;"
+							  class="glyphicon glyphicon-user">
+						</span>
+						</a>
+				</li>
+			<!--Cart Box add badges later by backend--> 
+				<li style="" class="">
+					<a href="#" data-toggle="modal" data-target="#myModal">Your Cart
+						<span style="float:right;font-size:20px;color:white; "
+							  class="glyphicon glyphicon-shopping-cart ">
+							<span class="badge badge-cart-items" style="background:;
+																	  color:white;">12</span>
+						</span>
+						
+						</a>
+				</li>
+			</ul>
+			
+					<form class="navbar-form navbar-right " role="search" style="">
+						
+						<div class="input-group">
+						<!--search button begining glass glyphicon-->	 
+						<div class="input-group-btn">
+						<button type="submit" class="btn btn-default">
+								<span style="font-size:15px;" class="glyphicon glyphicon-search"></span>
+						</button>
+						</div>
+						<!--search box-->
+							 <input style="" maxlength="100" type="text" class="form-control" 
+							 placeholder="Search"/>
+						<!--filter search-->
+						<div class="input-group-btn">
+						<button type="submit" class="btn btn-danger">
+							<span  style="color:white;"
+									  class="glyphicon glyphicon-filter"></span>
+								
+						</button>
+						</div>
+						
+						</div>
+						
+								
+					</form>
+
+				</div><!--navbar collapse end-->
+		</div><!--container fluid-end-->
+	</nav>
+	</div>
+	<!--HEADER DIV END-->
+</div>
+<!--modal testing-->	
+<div class="modal left fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h3 class="modal-title" id="myModalLabel" style="color:black;">Your Cart
+					<span style="margin-left:20px;font-size:30px;color:gray; "
+						  class="glyphicon glyphicon-shopping-cart"></span>
+						<span class="badge badge-cart-items-modal" style="
+																	  color:white;">12</span>
+					</h3>
+					<button class="btn btn-warning btn-block btn-modal-head" 
+							style="font-size:20px;" data-dismiss="modal"
+							aria-label="Close">Continue Shopping
+					<span class="glyphicon glyphicon-share-alt glyphicon-rotate-y"
+						  style=""></span>
+					</button>
+					<button class="btn btn-warning btn-block btn-modal-head"
+							style="font-size:20px;">Confirm &amp; Buy
+					<span class="glyphicon glyphicon-credit-card" style="float:right;"></span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="item-selected">
+					<div class="item-carted">
+					<img width="68" height="68" src="prdts/pears.jpg" />
+						<span class="item-carted-decs">Pears</span>
+						<span  title="Remove from Cart" style="float:right;color:orange;font-size:20px;" class="glyphicon glyphicon-trash"></span>
+					</div>
+					</div>
+					<div class="item-selected">
+					<div class="item-carted">
+					<img width="68" height="68" src="prdts/multigarinatta.jpg" />
+						<span class="item-carted-decs">Multigrain Atta</span>
+						<span  title="Remove from Cart" style="float:right;color:orange;font-size:20px;" class="glyphicon glyphicon-trash"></span>
+					</div>
+				</div>
+					<div class="item-selected">
+					<div class="item-carted">
+					<img width="68" height="68" src="prdts/axe.jpg" />
+						<span class="item-carted-decs">AXE</span>
+						<span  title="Remove from Cart" style="float:right;color:orange;font-size:20px;" class="glyphicon glyphicon-trash"></span>
+					</div>
+				</div>
+					<div class="item-selected">
+					<div class="item-carted">
+					<img width="68" height="68" src="prdts/kisan.jpg" />
+						<span class="item-carted-decs">Kisan</span>
+						<span  title="Remove from Cart" style="float:right;color:orange;font-size:20px;" class="glyphicon glyphicon-trash"></span>
+					</div>
+				</div>
+					<div class="item-selected">
+					<div class="item-carted">
+					<img width="68" height="68" src="prdts/maaza.jpg" />
+						<span class="item-carted-decs">Maaza</span>
+						<span  title="Remove from Cart" style="float:right;color:orange;font-size:20px;" class="glyphicon glyphicon-trash"></span>
+					</div>
+				</div>
+					<div class="item-selected">
+					<div class="item-carted">
+					<img width="68" height="68" src="prdts/vim.jpg" />
+						<span class="item-carted-decs">Vim</span>
+						<span  title="Remove from Cart" style="float:right;color:orange;font-size:20px;" class="glyphicon glyphicon-trash"></span>
+					</div>
+				</div>
+					<div class="item-selected">
+					<div class="item-carted">
+					<img width="68" height="68" src="prdts/surf.jpg" />
+						<span class="item-carted-decs">Surf</span>
+						<span  title="Remove from Cart" style="float:right;color:orange;font-size:20px;" class="glyphicon glyphicon-trash"></span>
+					</div>
+				</div>
+					<div class="item-selected">
+					<div class="item-carted">
+					<img width="68" height="68" src="prdts/tata.jpg" />
+						<span class="item-carted-decs">Tata Tea</span>
+						<span  title="Remove from Cart" style="float:right;color:orange;font-size:20px;" class="glyphicon glyphicon-trash"></span>
+					</div>
+				</div>
+					<div class="item-selected">
+					<div class="item-carted">
+					<img width="68" height="68" src="prdts/dove.jpg" />
+						<span class="item-carted-decs">Dove</span>
+						<span  title="Remove from Cart" style="float:right;color:orange;font-size:20px;" class="glyphicon glyphicon-trash"></span>
+					</div>
+				</div>
+					<div class="item-selected">
+					<div class="item-carted">
+					<img width="68" height="68" src="prdts/parleg.jpg" />
+						<span class="item-carted-decs">Parle G</span>
+						<span  title="Remove from Cart" style="float:right;color:orange;font-size:20px;" class="glyphicon glyphicon-trash"></span>
+					</div>
+				</div>
+				</div>
+				<div class="modal-footer">
+					<button style="padding:10px;font-size:25px;" class="btn btn-success btn-lg btn-block">Proceed to Payment</button>
+				</div>
+
+			</div><!-- modal-content -->
+		</div><!-- modal-dialog -->
+	</div><!-- modal -->	
+<!--modal testing end-->	
+<!--fluid div end-->
+<!--carousel fluid div-->
+<div  style="" class="container">
+	<!--div wrapper-->
+
+	<!--CAROUSEL BEGIN-->
+	<div id="carousel-page" style="background-color: white;">
+	<div class="col-xs-12">
+						<div id="my-slider" class="carousel slide" data-ride="carousel">
+
+								<!--indicators are bassically dot nav to teel next img-->
+									<ol class="carousel-indicators">
+										<li data-target="#my-slider" data-slide-to="0" class="active"></li>
+										<li data-target="#my-slider" data-slide-to="1"></li>
+										<li data-target="#my-slider" data-slide-to="2"></li>
+										<li data-target="#my-slider" data-slide-to="3"></li>
+										<li data-target="#my-slider" data-slide-to="4"></li>
+										<li data-target="#my-slider" data-slide-to="5"></li>
+										<li data-target="#my-slider" data-slide-to="6"></li>
+										<li data-target="#my-slider" data-slide-to="7"></li>
+
+									</ol>
+
+
+								<!--wraper for slides all img here-->
+
+					<div class="carousel-inner" role="listbox">
+										<div class="item active">
+											<img src="images/patanjali.jpg"  alt=""  />
+											
+										</div>
+										<div class="item">
+											<img src="images/bathing.jpg"  alt=""  />
+												
+										</div>									
+				<!--inline styling can change height of img but it destroy responsiveness better if all 						img is of required size not needed to worry then -->
+										<div class="item">
+											<img src="images/juice.jpg"  alt=""  />
+												
+										</div>
+										<div class="item " >
+											<img  src="images/choclate.jpg" alt="" />
+												
+										</div>
+										<div class="item">
+											<img src="images/lowprice.jpg"  alt=""  />
+												
+							           </div>
+							           <div class="item">
+											<img src="images/pepsi.jpg"  alt=""  />
+												
+							           </div>
+							           <div class="item">
+											<img src="images/cuppon.jpg"  alt=""  />
+												
+							           </div>
+							           <div class="item">
+											<img src="images/super.jpg"  alt=""  />
+												
+							           </div>
+
+									</div>
+
+								<!--control next and previous buttons  #myslider is call back to same psge item id my-slider dont forget to add #-->
+									<a class="left carousel-control" href="#my-slider" role="button" data-slide="prev">
+										<span class="glyphicon glyphicon-chevron-left" 
+										style="background:black;color:white;border-radius:25%;font-size:30px;font-weight:100;" aria-hidden="true"></span>
+										<span class="sr-only">Previous</span>
+									</a>
+
+							        <a class="right carousel-control" href="#my-slider" role="button" data-slide="next">
+										<span class="glyphicon glyphicon-chevron-right" 
+											style="background:black;color:white;border-radius:25%;font-size:30px;font-weight:100;"
+										aria-hidden="true"></span>
+										<span class="sr-only">Next</span>
+									</a>
+						</div>
+				</div>
+	</div>
+	</div>
+
+<!--CAROUSEL ending-->
+
+<div class="container">
+<div id="top-brands" class="row ">
+	<h3>Top Brands</h3>
+	<div class="col-xs-3">
+		<img src="images/patanjalit.jpg" alt="" class="img-responsive"/>
+	</div>
+	<div class="col-xs-3">
+		<img src="images/pepsit.jpg" alt="" class="img-responsive"/>
+	</div>
+	<div class="col-xs-3">
+		<img src="images/maggi.jpg" alt="" class="img-responsive"/>
+	</div>
+	<div class="col-xs-3">
+		<img src="images/dove.jpg" alt="" class="img-responsive"/>
+	</div>
+</div>
+<!--TOP BRANDS ROW END-->
+<div id="best-deals" class="row">
+	
+</div>
+<!--BEST DEALS ROW END-->
+<div id="categorised-prdt" class="row">
+	<h3>Category</h3>
+	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 cat">
+		<div class="col-xs-4">
+			<img src="images/fruitsandvegetables.png" href="" class="img-responsive"/>
+		</div>
+		<div class="col-xs-8">
+			<h3>Fruits &amp; Vegetables</h3>
+			<p>Fruit &amp; Vegetable Baskets, Vegetables, Fruits, Cut...</p>
+		</div>
+		<!--
+		Experimenting for a right centered chevron
+		<div class="col-xs-1">
+			<span class="glyphicon glyphicon-menu-right" style="vertical-align:center;"></span>
+		</div>
+		-->
+	</div>
+	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 cat">
+		<div class="col-xs-4">
+			<img src="images/groceryandstaples.png" href="" class="img-responsive"/>
+		</div>
+		<div class="col-xs-8">
+			<h3>Grocery &amp; Staples</h3>
+			<p>
+				Pulses, Atta &amp; Others, Rice, Dry Fruits &amp;
+				 Nuts, Edible Oils, Ghee &amp; Vanaspati, Spices, Salt &amp;…
+			</p>
+		</div>
+	</div>
+	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 cat">
+		<div class="col-xs-4">
+			<img src="images/beverages.png" href="" class="img-responsive"/>
+		</div>
+		<div class="col-xs-8">
+			<h3>Beverages</h3>
+			<p>Beverages Best Offers, Soft Drinks, Juices &amp;
+			 Concentrates, Tea &amp; Coffee, Health &amp; Energy…</p>
+		</div>
+	</div>
+	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 cat">
+		<div class="col-xs-4">
+			<img src="images/HouseHoldNeeds.png"  class="img-responsive"/>
+		</div>
+		<div class="col-xs-8">
+			<h3>Household Needs</h3>
+			<p>Household Best Offers, Laundry Detergents, Dishwashers, 
+			Cleaners, Cleaning Tools &amp;…</p>
+		</div>
+	</div>
+	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 cat">
+		<div class="col-xs-4">
+			<img src="images/personelcare.png"  class="img-responsive"/>
+		</div>
+		<div class="col-xs-8">
+			<h3>Personal Care</h3>
+			<p>Personal Care Best Offers, Bath &amp;
+			Body, Hair Care, Skin Care, Oral Care, Deos &amp; Perfumes,…</p>
+		</div>
+	</div>
+	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 cat">
+		<div class="col-xs-4">
+			<img src="images/breakfastanddairy.png"  class="img-responsive"/>
+		</div>
+		<div class="col-xs-8">
+			<h3>	Breakfast &amp; Dairy</h3>
+			<p>Breakfast &amp; Dairy Best Offers, Milk &amp;
+				Milk Products, Bread &amp; Eggs, Paneer &amp; Curd, Butter…</p>
+		</div>
+	</div>
+	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 cat">
+		<div class="col-xs-4">
+			<img src="images/biscuitssnacksandchocolates.png"  class="img-responsive"/>
+		</div>
+		<div class="col-xs-8">
+			<h3>Biscuits, Snacks &amp; Chocolates</h3>
+           <p> Biscuits &amp; Chocolates Offers, 
+			   Biscuits &amp; Cookies, Namkeen &amp; Snacks, Chips &amp; Crisps,…</p>
+		
+		</div>
+	</div>
+	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 cat">
+		<div class="col-xs-4">
+			<img src="images/noodlespastainstantfood.png"  class="img-responsive"/>
+		</div>
+		<div class="col-xs-8">
+			<h3>Noodles, Pasta &amp; Instant Food</h3>
+		<p>Noodles &amp; Pasta Best Offers, Noodles &amp; 
+			Vermicelli, Pasta &amp; Soups, Ready Made Meals…
+		</p>
+		</div>
+	</div>
+	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 cat">
+		<div class="col-xs-4">
+			<img src="images/babyprdt.png" class="img-responsive"/>
+		</div>
+		<div class="col-xs-8">
+			<h3>Baby &amp; Kids</h3>
+			<p>Baby Food, Diapers &amp; Wipes, Baby Skin &amp; Hair Care, 
+				Baby Accessories &amp; More
+			</p>
+		</div>
+	</div>
+	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 cat">
+		<div class="col-xs-4">
+			<img src="images/sauceandjams.png" class="img-responsive"/>
+		</div>
+		<div class="col-xs-8">
+			<h3>Sauces, Jams &amp; Condiments</h3>
+		<p>Sauces &amp; Jams Best Offers, Sauces &amp; Ketchups, Jams
+			&amp; Spreads, Mouth Fresheners…</p>
+		</div>
+	</div>
+	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 cat">
+		<div class="col-xs-4">
+			<img src="images/gourmetandorganic.png" class="img-responsive"/>
+		</div>
+		<div class="col-xs-8">
+			<h3>Organic &amp; Gourmet</h3>
+		<p>Chocolates &amp; Snacks, Beverages, 
+			Processed Food, Jams &amp; Spreads, Breakfast &amp; Dairy,…</p>
+		</div>
+	</div>
+	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 cat">
+		<div class="col-xs-4">
+			<img src="images/petcare.png" class="img-responsive"/>
+		</div>
+		<div class="col-xs-8">
+
+			<h3>Pet Care</h3>
+			<p>Dog Supplies, Cat Supplies</p>
+		</div>
+	</div>
+</div>
+<!--CATEGORY ROW END-->
+</div>
+	<!--THIS IS END OF MAIN CONTENTS-->
+	<!--Here Starts the Footer-->
+<div class="container table-responsive">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>	
+	
+	
+	
+	
+	
+	
+	
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover({
+		 html : true,
+        content : '<div id="popover-ls"><div style="font-size:20px;">Login Area</div><form action="" method="post" ><div class="form-group"><label for="email">Email:</label><input type="email" class="form-control" id="email"/></div><div class="form-group"><label for="pswd">Password:</label><input type="password" class="form-control" id="pswd"/></div><div class="form-group"><input type="submit " value="LogIn" style=" display:block;font-size:15px;" id="submit" class="btn btn-danger"/></div></form><hr/><div style="font-size:12px;">SignUp today to Order items in Your Cart.</div><a  style="display:block;font-size:20px;font-weight:bold;" type="button" class="btn  btn-success btn-md">Create an Account</a><div id="t-c"><a href="#"style="margin:0px;padding:0px;float:right;font-size:10px;">Terms & Conditions.</a></div></div>'    
+		}); 
+});
+</script>
+</body>
+</html>
