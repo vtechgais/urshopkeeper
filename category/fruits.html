@@ -1,0 +1,621 @@
+<!doctype html>
+<html>
+    <head>
+        <title></title>
+        <link rel="stylesheet" href="css/bootstrap.css">
+         <link rel="stylesheet" href="css/bootstrap.min.css">
+<style>
+#header-div{margin-bottom: 70px;}
+    #show-cart li{list-style: none;}
+    .view-item{ }
+    .view-item>a>h4{font-color:Black;text-decoration: none;}
+    .item-selected{margin-bottom: 5px;}
+    .item-carted-decs{font-size:20px;color:black;}
+    .glyphicon-rotate-y{float:right;transform:scaleX(-1);}
+    #top-brands{margin-top:10px;}
+    .cat{background: white;border:7px solid rgb(249,249,249);
+    color:black; }
+    .cat:hover img{}
+    .cat p{color:gray;}
+    .popover{background:rgb(32,32,32);color:white;font-size:18px;}
+    .btn-modal-head:hover{color:black;}
+   #total-cart-rs{position:relative;
+        left:-50px;}
+    
+        
+    .badge-cart-items{ background:rgb(217,83,79);
+   position:relative;
+   top: -15px;
+   left: -30px;}
+    .badge-cart-items-modal{ background:rgb(217,83,79);
+   position:relative;
+   top: -20px;
+   left: -15px;}
+    /*experiment*/
+        .modal.left .modal-dialog,
+    .modal.right .modal-dialog {
+        position: fixed;
+        margin: auto;
+        width: 320px;
+        height: 100%;
+        -webkit-transform: translate3d(0%, 0, 0);
+            -ms-transform: translate3d(0%, 0, 0);
+             -o-transform: translate3d(0%, 0, 0);
+                transform: translate3d(0%, 0, 0);
+    }
+
+    .modal.left .modal-content,
+    .modal.right .modal-content {
+        height: 100%;
+        overflow-y: auto;
+    }
+    
+    .modal.left .modal-body,
+    .modal.right .modal-body {
+        padding: 15px 15px 80px;
+    }
+
+    /*Left*/
+    .modal.left.fade .modal-dialog{
+        left: -320px;
+        -webkit-transition: opacity 0.3s linear, left 0.3s ease-out;
+           -moz-transition: opacity 0.3s linear, left 0.3s ease-out;
+             -o-transition: opacity 0.3s linear, left 0.3s ease-out;
+                transition: opacity 0.3s linear, left 0.3s ease-out;
+    }
+    
+    .modal.left.fade.in .modal-dialog{
+        left: 0;
+    }
+    
+    
+</style>
+<style>
+.number-item{width:50px;}
+.our-price{font-size:25px; color:black;}
+.market-price{text-decoration:line-through;font-size:18px;color:gray;}
+.view-item{background-color: white;}
+
+</style>
+    </head>
+<body style="background-color:gray;">
+<div class="container-fluid">
+    <div id="header-div" class="row">
+    <nav class="navbar navbar-default  navbar-inverse navbar-fixed-top " role="navigation">
+        <div class="container-fluid" >
+    <!--this helps grouping beter-->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle Navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            <a href="https:" class="navbar-brand tooltip-test"
+                data-toggle="tooltip" data-placement="right"
+                      title="Home"
+               >
+            <!--img logo-->
+            <!--glyphicon home-->
+                <span style="color:white;font-size:20px;"
+                              class="glyphicon glyphicon-home " ></span>
+            </a>
+            </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <!--nav list items-->                   
+            <ul class="nav navbar-nav">
+            <!--we will call geolocation on page load or click-->
+                <li class="">
+                    <a  onclick="getMyDelivLoc() promptLoc()">
+                     <span style="font-size:20px;" class="glyphicon glyphicon-map-marker"></span>
+                        City-Pincode
+                        <span style="font-size:10px;" 
+                        class="glyphicon glyphicon-chevron-down"></span>
+                    </a>
+                </li>
+            <!--login and signup-->
+                <li  style="" class="">
+                    <a href="#" data-toggle="popover" data-placement="bottom"
+                       data-container="body" 
+                       >
+                        Login/SignUp
+                        <span style="float:right;font-size:20px;color:white;"
+                              class="glyphicon glyphicon-user">
+                        </span>
+                        </a>
+                </li>
+            <!--Cart Box add badges later by backend--> 
+                <li style="" class="">
+                    <a href="#" data-toggle="modal" data-target="#myModal">Your Cart
+                        <span style="float:right;font-size:20px;color:white; "
+                              class="glyphicon glyphicon-shopping-cart ">
+                            <span class="badge badge-cart-items" style="background:;
+                                                                      color:white;" id="count-cart"></span>
+                            <span id="total-cart-rs">&#8377;<span id="total-cart"></span></span>
+                        </span>
+
+                        
+                        </a>
+                </li>
+            </ul>
+            
+                    <form class="navbar-form navbar-right " role="search" style="">
+                        
+                        <div class="input-group">
+                        <!--search button begining glass glyphicon-->    
+                        <div class="input-group-btn">
+                        <button type="submit" class="btn btn-default">
+                                <span style="font-size:15px;" class="glyphicon glyphicon-search"></span>
+                        </button>
+                        </div>
+                        <!--search box-->
+                             <input style="" maxlength="100" type="text" class="form-control" 
+                             placeholder="Search"/>
+                        <!--filter search-->
+                        <div class="input-group-btn">
+                        <button type="submit" class="btn btn-danger">
+                            <span  style="color:white;"
+                                      class="glyphicon glyphicon-filter"></span>
+                                
+                        </button>
+                        </div>
+                        
+                        </div>
+                        
+                                
+                    </form>
+
+                </div><!--navbar collapse end-->
+        </div><!--container fluid-end-->
+    </nav>
+    </div>
+    <!--HEADER DIV END-->
+</div>
+<div class="modal left fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h3 class="modal-title" id="myModalLabel" style="color:black;">Your Cart
+                    <span style="margin-left:20px;font-size:30px;color:gray; "
+                          class="glyphicon glyphicon-shopping-cart"></span>
+                    </h3>
+                    <button class="btn btn-warning btn-block btn-modal-head" 
+                            style="font-size:20px;" data-dismiss="modal"
+                            aria-label="Close">Continue Shopping
+                    <span class="glyphicon glyphicon-share-alt glyphicon-rotate-y"
+                          style=""></span>
+                    </button>
+                    <button class="btn btn-warning btn-block btn-modal-head"
+                            style="font-size:20px;">Confirm &amp; Buy
+                    <span class="glyphicon glyphicon-credit-card" style="float:right;"></span>
+                    </button>
+                    <button id="clear-cart" class="btn btn-danger " style="margin-top:2px;">Clear Cart</button>
+                </div>
+                <div class="modal-body" id="show-cart">
+                    
+                </div>
+                <div class="modal-footer" >
+                <div style="float:left;" >Total Rs.<span id="total-cart"></span></div>
+                    <button style="padding:10px;font-size:25px;" class="btn btn-success btn-lg btn-block">Proceed to Payment</button>
+                </div>
+
+            </div><!-- modal-content -->
+        </div><!-- modal-dialog -->
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+<div class="container">
+    <div class="col-xs-4 col-sm-3 view-item">
+        <a class="add-to-cart" href="#" data-name="Chaunsa Mango" data-price="108">
+            <h4>Chaunsa Mango</h4>
+             <div class="col-xs-12">
+                <img src="categoryimg/fruits/chaunsamango.jpg" class="img-responsive"/>
+            </div>
+            <div class="col-xs-12">
+               <span class="market-price">128</span>
+               <span class="our-price">108</span>
+               <button class="btn btn-warning btn-block">Add to Cart</button>
+             </div>
+        </a>
+    </div>
+    <div class="col-xs-4 col-sm-3 view-item">
+        <a class="add-to-cart" href="#" data-name="Fujji Apple" data-price="289">
+            <h4>Fujji Apple</h4>
+             <div class="col-xs-12">
+                <img src="categoryimg/fruits/fujiapple.jpg" class="img-responsive"/>
+            </div>
+            <div class="col-xs-12">
+               <span class="market-price">320</span>
+               <span class="our-price">289</span>
+               <button class="btn btn-warning btn-block">Add to Cart</button>
+             </div>
+        </a>
+    </div>
+    <div class="col-xs-4 col-sm-3 view-item">
+        <a class="add-to-cart" href="#" data-name="Grany Smith Apple" data-price="405">
+            <h4>Grany Smith Apple</h4>
+             <div class="col-xs-12">
+                <img src="categoryimg/fruits/granysmithapple.jpg" class="img-responsive"/>
+            </div>
+            <div class="col-xs-12">
+               <span class="market-price">440</span>
+               <span class="our-price">405</span>
+               <button class="btn btn-warning btn-block">Add to Cart</button>
+             </div>
+        </a>
+    </div>
+    <div class="col-xs-4 col-sm-3 view-item">
+        <a class="add-to-cart" href="#" data-name="Royal Gala Apple" data-price="338">
+            <h4>Royal Gala Apple</h4>
+             <div class="col-xs-12">
+                <img src="categoryimg/fruits/royalgalaapple.jpg" class="img-responsive"/>
+            </div>
+            <div class="col-xs-12">
+               <span class="market-price">380</span>
+               <span class="our-price">338</span>
+               <button class="btn btn-warning btn-block">Add to Cart</button>
+             </div>
+        </a>
+    </div>
+    <div class="col-xs-4 col-sm-3 view-item">
+        <a class="add-to-cart" href="#" data-name="Papaya" data-price="56">
+            <h4>Papaya</h4>
+             <div class="col-xs-12">
+                <img src="categoryimg/fruits/papaya.jpg" class="img-responsive"/>
+            </div>
+            <div class="col-xs-12">
+               <span class="market-price">65</span>
+               <span class="our-price">56</span>
+               <button class="btn btn-warning btn-block">Add to Cart</button>
+             </div>
+        </a>
+    </div>
+    <div class="col-xs-4 col-sm-3 view-item">
+        <a class="add-to-cart" href="#" data-name="Indian Pear" data-price="69">
+            <h4>Indian Pear</h4>
+             <div class="col-xs-12">
+                <img src="categoryimg/fruits/indianpear.jpg" class="img-responsive"/>
+            </div>
+            <div class="col-xs-12">
+               <span class="market-price">84</span>
+               <span class="our-price">69</span>
+               <button class="btn btn-warning btn-block">Add to Cart</button>
+             </div>
+        </a>
+    </div>
+    <div class="col-xs-4 col-sm-3 view-item">
+        <a class="add-to-cart" href="#" data-name="Pomegranate" data-price="162">
+            <h4>Pomegranate</h4>
+             <div class="col-xs-12">
+                <img src="categoryimg/fruits/pomegranate.jpg" class="img-responsive"/>
+            </div>
+            <div class="col-xs-12">
+               <span class="market-price">176</span>
+               <span class="our-price">162</span>
+               <button class="btn btn-warning btn-block">Add to Cart</button>
+             </div>
+        </a>
+    </div>
+    <div class="col-xs-4 col-sm-3 view-item">
+        <a class="add-to-cart" href="#" data-name="Indian Pear(Babugosha)" data-price="102">
+            <h4>Indian Pear(Babugosha)</h4>
+             <div class="col-xs-12">
+                <img src="categoryimg/fruits/indianpearbabugosha.jpg" class="img-responsive"/>
+            </div>
+            <div class="col-xs-12">
+               <span class="market-price">120</span>
+               <span class="our-price">102</span>
+               <button class="btn btn-warning btn-block">Add to Cart</button>
+             </div>
+        </a>
+    </div>
+    <div class="col-xs-4 col-sm-3 view-item">
+        <a class="add-to-cart" href="#" data-name="Kiran Water Melon" data-price="162">
+            <h4>Kiran Water Melon</h4>
+             <div class="col-xs-12">
+                <img src="categoryimg/fruits/kiranwatermelon.jpg" class="img-responsive"/>
+            </div>
+            <div class="col-xs-12">
+               <span class="market-price">170</span>
+               <span class="our-price">162</span>
+               <button class="btn btn-warning btn-block">Add to Cart</button>
+             </div>
+        </a>
+    </div>
+    <div class="col-xs-4 col-sm-3 view-item">
+        <a class="add-to-cart" href="#" data-name="Langra Mango" data-price="125">
+            <h4>Langra Mango</h4>
+             <div class="col-xs-12">
+                <img src="categoryimg/fruits/langramango.jpg" class="img-responsive"/>
+            </div>
+            <div class="col-xs-12">
+               <span class="market-price">140</span>
+               <span class="our-price">125</span>
+               <button class="btn btn-warning btn-block">Add to Cart</button>
+             </div>
+        </a>
+    </div>
+    <div class="col-xs-4 col-sm-3 view-item">
+        <a class="add-to-cart" href="#" data-name="Pineapple" data-price="85">
+            <h4>Pineapple</h4>
+             <div class="col-xs-12">
+                <img src="categoryimg/fruits/pineapple.jpg" class="img-responsive"/>
+            </div>
+            <div class="col-xs-12">
+               <span class="market-price">95</span>
+               <span class="our-price">85</span>
+               <button class="btn btn-warning btn-block">Add to Cart</button>
+             </div>
+        </a>
+    </div>
+    <div class="col-xs-4 col-sm-3 view-item">
+        <a class="add-to-cart" href="#" data-name="Red Delicious Apples" data-price="289">
+            <h4>Red Delicious Apples</h4>
+             <div class="col-xs-12">
+                <img src="categoryimg/fruits/reddeliciousapple.jpg" class="img-responsive"/>
+            </div>
+            <div class="col-xs-12">
+               <span class="market-price">320</span>
+               <span class="our-price">289</span>
+               <button class="btn btn-warning btn-block">Add to Cart</button>
+             </div>
+        </a>
+    </div>
+    <div class="col-xs-4 col-sm-3 view-item">
+        <a class="add-to-cart" href="#" data-name="Robust Banana" data-price="48">
+            <h4>Robust Banana</h4>
+             <div class="col-xs-12">
+                <img src="categoryimg/fruits/robustbanana.jpg" class="img-responsive"/>
+            </div>
+            <div class="col-xs-12">
+               <span class="market-price">60</span>
+               <span class="our-price">48</span>
+               <button class="btn btn-warning btn-block">Add to Cart</button>
+             </div>
+        </a>
+    </div>
+    <div class="col-xs-4 col-sm-3 view-item">
+        <a class="add-to-cart" href="#" data-name="Zespri Green Kiwi" data-price="162">
+            <h4>Zespri Green Kiwi</h4>
+             <div class="col-xs-12">
+                <img src="categoryimg/fruits/zesprigreenkiwi.jpg" class="img-responsive"/>
+            </div>
+            <div class="col-xs-12">
+               <span class="market-price">130(3 Units)</span>
+               <span class="our-price">105</span>
+               <button class="btn btn-warning btn-block">Add to Cart</button>
+             </div>
+        </a>
+    </div>
+</div>
+
+
+
+
+
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script >
+                var shoppingCart = (function () {
+    // Private methods and properties
+    var cart = [];
+
+    function Item(name, price, count) {
+        this.name = name
+        this.price = price
+        this.count = count
+    }
+
+    function saveCart() {
+        localStorage.setItem("shoppingCart", JSON.stringify(cart));
+    }
+
+    function loadCart() {
+        cart = JSON.parse(localStorage.getItem("shoppingCart"));
+        if (cart === null) {
+            cart = []
+        }
+    }
+
+    loadCart();
+
+
+
+    // Public methods and properties
+    var obj = {};
+
+    obj.addItemToCart = function (name, price, count) {
+        for (var i in cart) {
+            if (cart[i].name === name) {
+                cart[i].count += count;
+                saveCart();
+                return;
+            }
+        }
+
+        console.log("addItemToCart:", name, price, count);
+
+        var item = new Item(name, price, count);
+        cart.push(item);
+        saveCart();
+    };
+
+    obj.setCountForItem = function (name, count) {
+        for (var i in cart) {
+            if (cart[i].name === name) {
+                cart[i].count = count;
+                break;
+            }
+        }
+        saveCart();
+    };
+
+
+    obj.removeItemFromCart = function (name) { // Removes one item
+        for (var i in cart) {
+            if (cart[i].name === name) { // "3" === 3 false
+                cart[i].count--; // cart[i].count --
+                if (cart[i].count === 0) {
+                    cart.splice(i, 1);
+                }
+                break;
+            }
+        }
+        saveCart();
+    };
+
+
+    obj.removeItemFromCartAll = function (name) { // removes all item name
+        for (var i in cart) {
+            if (cart[i].name === name) {
+                cart.splice(i, 1);
+                break;
+            }
+        }
+        saveCart();
+    };
+
+
+    obj.clearCart = function () {
+        cart = [];
+        saveCart();
+    }
+
+
+    obj.countCart = function () { // -> return total count
+        var totalCount = 0;
+        for (var i in cart) {
+            totalCount += cart[i].count;
+        }
+
+        return totalCount;
+    };
+
+    obj.totalCart = function () { // -> return total cost
+        var totalCost = 0;
+        for (var i in cart) {
+            totalCost += cart[i].price * cart[i].count;
+        }
+        return totalCost.toFixed(2);
+    };
+
+    obj.listCart = function () { // -> array of Items
+        var cartCopy = [];
+        console.log("Listing cart");
+        console.log(cart);
+        for (var i in cart) {
+            console.log(i);
+            var item = cart[i];
+            var itemCopy = {};
+            for (var p in item) {
+                itemCopy[p] = item[p];
+            }
+            itemCopy.total = (item.price * item.count).toFixed(2);
+            cartCopy.push(itemCopy);
+        }
+        return cartCopy;
+    };
+
+    // ----------------------------
+    return obj;
+            })();
+</script>
+
+<script>
+            $(".add-to-cart").click(function(event){
+                event.preventDefault();
+                var name = $(this).attr("data-name");
+                var price = Number($(this).attr("data-price"));
+                shoppingCart.addItemToCart(name, price, 1);
+                displayCart();
+            });
+            $("#clear-cart").click(function(event){
+                shoppingCart.clearCart();
+                displayCart();
+            });
+            function displayCart() {
+                var cartArray = shoppingCart.listCart();
+                console.log(cartArray);
+                var output = "";
+                for (var i in cartArray) {
+                    output += "<li>"
+                        +cartArray[i].name
+                        +"<br/>"
+                        +"<span style='margin:5px 10px 5px 2px;'>Net Price:</span>"+cartArray[i].total
+                        +"<br/>"
+
+                        +" <button class='plus-item btn btn-warning btn-sm' data-name='"
+                        +cartArray[i].name+"'>+</button>"
+                        +" <input class='item-count number-item' type='number' data-name='"
+                        +cartArray[i].name
+                        +"' value='"+cartArray[i].count+"' >"
+                        +" <button class='subtract-item btn btn-warning btn-sm' data-name='"
+                        +cartArray[i].name+"'>-</button>"
+                        +" <span class='delete-item glyphicon glyphicon-trash' style='color:orange;font-size:20px;float:right;' data-name='"
+                        +cartArray[i].name+"'></span>"
+
+                        +"</li>";
+                }
+                $("#show-cart").html(output);
+                $("#count-cart").html( shoppingCart.countCart() );
+                $("#total-cart").html( shoppingCart.totalCart() );
+            }
+            $("#show-cart").on("click", ".delete-item", function(event){
+                var name = $(this).attr("data-name");
+                shoppingCart.removeItemFromCartAll(name);
+                displayCart();
+            });
+            $("#show-cart").on("click", ".subtract-item", function(event){
+                var name = $(this).attr("data-name");
+                shoppingCart.removeItemFromCart(name);
+                displayCart();
+            });
+            $("#show-cart").on("click", ".plus-item", function(event){
+                var name = $(this).attr("data-name");
+                shoppingCart.addItemToCart(name, 0, 1);
+                displayCart();
+            });
+            $("#show-cart").on("change", ".item-count", function(event){
+                var name = $(this).attr("data-name");
+                var count = Number($(this).val());
+                shoppingCart.setCountForItem(name, count);
+                displayCart();
+            });
+            displayCart();
+</script>
+
+
+
+
+    </body>
+</html>
