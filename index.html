@@ -36,8 +36,13 @@
 	.btn-modal-head:hover{color:black;}
 	.badge-cart-items{ background:rgb(217,83,79);
    position:relative;
-   top: -15px;
-   left: -30px;}
+   top: -10px;
+   left: -12px;}
+    .msg-overlap{
+   position:relative;
+        
+   top: 5px;
+   left: -26px;}
 	.badge-cart-items-modal{ background:rgb(217,83,79);
    position:relative;
    top: -20px;
@@ -110,7 +115,7 @@
 			<ul class="nav navbar-nav">
 			<!--we will call geolocation on page load or click-->
 				<li class="">
-					<a onclick="getLocation()" data-toggle="modal" data-target="#myModal">
+					<a onclick="getLocation()" data-toggle="modal" data-target="#LocationModal">
 					 <span style="font-size:20px;" class="glyphicon glyphicon-map-marker"></span>
 						City-Pincode
 						<span style="font-size:10px;" 
@@ -177,12 +182,12 @@
 	
 	
 	<!--tesiing location-->
-	<div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog modal-md">
+	<div class="modal fade" id="LocationModal" role="dialog">
+    <div class="modal-dialog modal-sm">
 
     <div class="modal-content">
 
-    <div class="modal-header" style="color:white">Your Location
+    <div class="modal-header" style="color:Black">Your Location
     <button type="button" class="close" data-dismiss="modal">&times;</button>
     </div>
     <div class="modal-body">
@@ -254,7 +259,12 @@
         </div></div></div>
 	
 	
-	
+	<div style="display: inline-block;z-index: 5; position:fixed; bottom:20px;right:20px">
+      <a href="https://m.me/halanxtech?ref=Welcome%20message" style="display: inline-block;background:transparent;padding: 9px;border-radius:5px;">
+          <i  class="glyphicon glyphicon-comment" aria-hidden="true" style="font-size: 30px;color:#0084ff;"></i>
+          <i  class="glyphicon glyphicon-comment msg-overlap" aria-hidden="true" style="font-size: 30px;color:#fa3c4c;background:transparent;"></i>
+      </a>
+  </div>
 	
 	
 <!--modal testing-->	
@@ -461,20 +471,6 @@
 	</div>
 </div>
 <!--TOP BRANDS ROW END-->
-	
-	
-	<div style="display: inline-block;z-index: 5; position:fixed; bottom:20px;right:20px">
-      <a href="https://m.me/halanxtech?ref=Welcome%20message" style="display: inline-block;background: orange;padding: 9px;border-radius:5px;">
-          <i class="fa fa-comments" aria-hidden="true" style="font-size: 30px;color: white;"></i>
-      </a>
-  </div>
-	
-	
-	
-	
-	
-	
-	
 <div id="best-deals" class="row">
 	
 </div>
