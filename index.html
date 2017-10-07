@@ -110,14 +110,9 @@
 			<ul class="nav navbar-nav">
 			<!--we will call geolocation on page load or click-->
 				<li class="">
-					<a  onclick="getMyDelivLoc() promptLoc()">
-					 <span style="font-size:20px;" onload="getLocation()" 
-					       class="glyphicon glyphicon-map-marker"></span>
+					<a onclick="getLocation()" data-toggle="modal" data-target="#myModal">
+					 <span style="font-size:20px;" class="glyphicon glyphicon-map-marker"></span>
 						City-Pincode
-						
-						<span class="glyphicon glyphicon-screenshot" 
-      						onclick="getLocation()" data-toggle="modal" 
-						data-target="#myModal"></span>
 						<span style="font-size:10px;" 
 						class="glyphicon glyphicon-chevron-down"></span>
 					</a>
@@ -178,7 +173,10 @@
 	</div>
 	<!--HEADER DIV END-->
 </div>
-<!--test location-->
+	
+	
+	
+	<!--tesiing location-->
 	<div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog modal-md">
 
@@ -254,7 +252,6 @@
     </script>
         </div>
         </div></div></div>
-	
 	
 	
 	
@@ -470,21 +467,21 @@
 <!--BEST DEALS ROW END-->
 <div id="categorised-prdt" class="row">
 	<h3>Category</h3>
-	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 cat">
-		<a href="https://vtechguys.github.io/dailystore/category/fruits.html"><div class="col-xs-4">
+	<a href="https://vtechguys.github.io/dailystore/category/fruits.html"> <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 cat" >
+		<div class="col-xs-4">
 			<img src="images/fruitsandvegetables.png" href="" class="img-responsive"/>
 		</div>
 		<div class="col-xs-8">
 			<h3>Fruits &amp; Vegetables</h3>
 			<p>Fruit &amp; Vegetable Baskets, Vegetables, Fruits, Cut...</p>
-			</div></a>
+		</div>
 		<!--
 		Experimenting for a right centered chevron
 		<div class="col-xs-1">
 			<span class="glyphicon glyphicon-menu-right" style="vertical-align:center;"></span>
 		</div>
-		-->
-	</div>
+-->
+	</div></a>
 	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 cat">
 		<div class="col-xs-4">
 			<img src="images/groceryandstaples.png" href="" class="img-responsive"/>
